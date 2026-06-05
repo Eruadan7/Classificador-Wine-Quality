@@ -1,2 +1,2 @@
 Data:
-https://github.com/Eruadan7/Classificador-Wine-Quality.git
+https://archive.ics.uci.edu/dataset/186/wine+quality
