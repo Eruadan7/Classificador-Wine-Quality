@@ -1,0 +1,49 @@
+Random Forest:
+
+=== RESULTADOS DA VALIDAÇÃO CRUZADA (cv=10) ===
+Acurácia média:  0.8462 (+/- 0.0253)
+F1-Score médio:  0.8328
+
+=== ACURÁCIA POR CLASSE (VALIDAÇÃO CRUZADA) ===
+  Qualidade 3: 1.0000
+  Qualidade 4: 0.9795
+  Qualidade 5: 0.7228
+  Qualidade 6: 0.3516
+  Qualidade 7: 0.8836
+  Qualidade 8: 0.9866
+  Qualidade 9: 0.9993
+
+SUPPORT VECTOR MACHINE:
+
+=== RESULTADOS DA VALIDAÇÃO CRUZADA (cv=10) ===
+Acurácia média:  0.8872 (+/- 0.0290)
+F1-Score médio:  0.8823
+
+=== ACURÁCIA POR CLASSE (VALIDAÇÃO CRUZADA) ===
+  Qualidade 3: 1.0000
+  Qualidade 4: 0.9905
+  Qualidade 5: 0.7606
+  Qualidade 6: 0.5162
+  Qualidade 7: 0.9468
+  Qualidade 8: 0.9965
+  Qualidade 9: 1.0000
+
+Gradient Boosting Classifier:
+
+=== RESULTADOS DA VALIDAÇÃO CRUZADA (cv=10) ===
+Acurácia média:  0.8485 (+/- 0.0369)
+F1-Score médio:  0.8422
+
+=== ACURÁCIA POR CLASSE (VALIDAÇÃO CRUZADA) ===
+  Qualidade 3: 0.9989
+  Qualidade 4: 0.9697
+  Qualidade 5: 0.6985
+  Qualidade 6: 0.4461
+  Qualidade 7: 0.8487
+  Qualidade 8: 0.9781
+  Qualidade 9: 0.9993
+
+  --------------------------------------------------
+
+  Support Vector Machine apresentou os melhores resultados, seguido de 
+  Gradient Boosting Classifier e, por último, Random Forest.
