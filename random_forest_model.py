@@ -3,7 +3,8 @@ import numpy as np
 import pandas as pd
 from imblearn.over_sampling import SMOTE
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import RandomizedSearchCV, cross_validate
+from sklearn.model_selection import RandomizedSearchCV, cross_validate, cross_val_predict
+from sklearn.metrics import confusion_matrix, classification_report
 from pickle import dump
 
 # 1. CARREGAR OS DADOS
@@ -64,12 +65,28 @@ scores_cross = cross_validate(
 
 print("\n=== RESULTADOS DA VALIDAÇÃO CRUZADA (cv=10) ===")
 print(f"Acurácia média:  {scores_cross['test_accuracy'].mean():.4f} (+/- {scores_cross['test_accuracy'].std():.4f})")
-print(f"Precision média: {scores_cross['test_precision_weighted'].mean():.4f}")
-print(f"Recall médio:    {scores_cross['test_recall_weighted'].mean():.4f}")
+#print(f"Precision média: {scores_cross['test_precision_weighted'].mean():.4f}")
+#print(f"Recall médio:    {scores_cross['test_recall_weighted'].mean():.4f}")
 print(f"F1-Score médio:  {scores_cross['test_f1_weighted'].mean():.4f}")
 
-# 8. TREINAR MODELO FINAL
+# 8. OBTER ACURÁCIA POR CLASSES
+
+# Predições com validação cruzada
+
+modelo_para_cv = RandomForestClassifier(**rf_hyperparameters.best_params_, random_state=42)
+predicoes_cv = cross_val_predict(modelo_para_cv, atributos_b, classes_b, cv=10)
+
+# Acurácia por classe = diagonal da matriz / total daquela classe 
+matriz_cv = confusion_matrix(classes_b, predicoes_cv)
+acuracia_por_classe_cv = matriz_cv.diagonal() / matriz_cv.sum(axis=1)
+
+print("\n=== ACURÁCIA POR CLASSE (VALIDAÇÃO CRUZADA) ===")
+qualidades = [3, 4, 5, 6, 7, 8, 9]
+for i, qual in enumerate(qualidades):
+    print(f"  Qualidade {qual}: {acuracia_por_classe_cv[i]:.4f}")
+
+# 9. TREINAR MODELO FINAL
 wine_rf = rf_otimizado.fit(atributos_b, classes_b)
 
-# 9. SALVAR MODELO
+# 10. SALVAR MODELO
 dump(wine_rf, open('modelo_random_forest.pkl', 'wb'))
